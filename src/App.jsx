@@ -1,5 +1,5 @@
 import Header from './components/Header'
-import Sidebar from './components/Sidebar'
+import Sidebar from './components/MainSidebar'
 
 export default function App() {
   return (
@@ -7,7 +7,7 @@ export default function App() {
       <Sidebar />
       <div className="pl-64">
         <Header />
-        <main className="p-6">
+        <main className="p-6 w-full">
         </main>
       </div>
     </div>
