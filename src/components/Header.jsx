@@ -1,6 +1,11 @@
-import { Bell, Globe, Moon } from 'lucide-react'
+
+import React, { useState } from "react"
+import WalletModal from './WalletModal'
+
 
 export default function Header() {
+    const [isWalletModalOpen, setIsWalletModalOpen] = useState(false)
+
     return (
         <header className=" flex items-center justify-between px-6 py-4 bg-black border-b border-gray-800">
             <div className="flex items-center gap-2">
@@ -56,7 +61,8 @@ export default function Header() {
                     </svg>
                 </button>
 
-                <button className="px-4 py-2 text-sm font-medium text-white bg-custom-gradient rounded-lg hover:bg-purple-700">
+                <button onClick={() => setIsWalletModalOpen(true)}
+                    className="px-4 py-2 text-sm font-medium text-white bg-custom-gradient rounded-lg hover:bg-purple-700">
                     Connect Wallet
                 </button>
 
@@ -83,6 +89,12 @@ export default function Header() {
 
                 </button>
             </div>
+
+
+            <WalletModal
+                isOpen={isWalletModalOpen}
+                onClose={() => setIsWalletModalOpen(false)}
+            />
         </header>
     )
 }
