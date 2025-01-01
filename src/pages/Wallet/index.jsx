@@ -22,12 +22,12 @@ export default function Wallet() {
                     <div className="flex justify-center flex-col items-center mt-16 gap-8">
                         <button
                             onClick={() => navigate('/wallet/create')}
-                            className="bg-custom-gradient lg:w-[656px] sm:w-[300px] h-[56px] rounded-lg hover:opacity-90 transition-opacity"
+                            className="bg-custom-gradient lg:w-[656px] sm:w-[300px] w-[200px] h-[56px] rounded-lg hover:opacity-90 transition-opacity"
                         >
                             Create A Wallet
                         </button>
                         <button
-                            className="bg-[#1F1F1F] text-[#F15223] lg:w-[656px] sm:w-[300px] h-[56px] rounded-lg hover:opacity-90 transition-opacity"
+                            className="bg-[#1F1F1F] text-[#F15223] lg:w-[656px] sm:w-[300px] w-[200px] h-[56px] rounded-lg hover:opacity-90 transition-opacity"
                         >
                             I Already Have a Wallet
                         </button>
