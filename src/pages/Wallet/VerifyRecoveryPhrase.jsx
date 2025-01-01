@@ -1,46 +1,44 @@
 import { useState, useEffect } from 'react';
 import WalletBreadcrumb from './WalletBreadcrumb';
+import { useNavigate } from 'react-router-dom';
+import SuccessModal from '../../components/SuccessModal';
+
 
 export default function VerifyRecoveryPhrase() {
-    // Önceki sayfadan gelen seed phrase'leri simüle ediyoruz
-    // Gerçek uygulamada bu veriler güvenli bir şekilde aktarılmalı
-    const [originalPhrases, setOriginalPhrases] = useState([
-        'script', 'recovery', 'music', 'content',
-        'mint', 'horse', 'pilot', 'wallet',
-        'urge', 'globe', 'easy', 'scale'
-    ]);
+    const navigate = useNavigate();
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-    const [selectedPhrases, setSelectedPhrases] = useState([]);
-    const [shuffledPhrases, setShuffledPhrases] = useState([]);
+    const handleNext = () => {
+        setShowSuccessModal(true);
+    };
 
-    // Kelimeleri karıştır
+    const handleConfirm = () => {
+        navigate('/');
+    };
+
+    const [allPhrases, setAllPhrases] = useState(() => {
+        const stored = localStorage.getItem('seedPhrases');
+        return stored ? JSON.parse(stored) : [];
+    });
+
+    const [requiredIndexes] = useState(() => {
+        const indexes = [8, 11, 6, 0];
+        return indexes;
+    });
+
+    const [selectedPhrases, setSelectedPhrases] = useState(Array(4).fill(''));
+
     useEffect(() => {
-        const shuffled = [...originalPhrases]
-            .sort(() => Math.random() - 0.5)
-            .map(phrase => ({ text: phrase, isSelected: false }));
-        setShuffledPhrases(shuffled);
+        return () => {
+            localStorage.removeItem('seedPhrases');
+        };
     }, []);
 
-    const handlePhraseClick = (phrase, index) => {
-        if (!shuffledPhrases[index].isSelected) {
-            setSelectedPhrases([...selectedPhrases, phrase]);
-            setShuffledPhrases(shuffledPhrases.map((p, i) =>
-                i === index ? { ...p, isSelected: true } : p
-            ));
+    useEffect(() => {
+        if (allPhrases.length === 0) {
+            navigate('/wallet');
         }
-    };
-
-    const handleSelectedPhraseClick = (phrase, index) => {
-        setSelectedPhrases(selectedPhrases.filter((_, i) => i !== index));
-        setShuffledPhrases(shuffledPhrases.map(p =>
-            p.text === phrase ? { ...p, isSelected: false } : p
-        ));
-    };
-
-    // Seçilen kelimeler doğru sırada mı kontrol et
-    const isCorrectOrder = selectedPhrases.every((phrase, index) =>
-        phrase === originalPhrases[index]
-    );
+    }, [allPhrases, navigate]);
 
     return (
         <div className="max-w-2xl mx-auto mt-24">
@@ -55,53 +53,59 @@ export default function VerifyRecoveryPhrase() {
                 </p>
             </div>
 
-            {/* Seçilen kelimeler */}
-            <div className="grid grid-cols-4 gap-4 mb-8">
-                {Array(12).fill(null).map((_, index) => (
+            <div className="grid grid-cols-4 gap-4 mb-8 text-white">
+                {requiredIndexes.map((originalIndex, index) => (
                     <div
                         key={`selected-${index}`}
-                        onClick={() => selectedPhrases[index] && handleSelectedPhraseClick(selectedPhrases[index], index)}
-                        className={`
-                            bg-[#1F1F1F] rounded-lg p-3 flex items-center gap-2 
-                            ${selectedPhrases[index] ? 'cursor-pointer hover:bg-[#2A2A2A]' : 'opacity-50'}
-                        `}
+                        className="bg-[#1F1F1F] rounded-lg p-3 flex items-center gap-2"
                     >
-                        <span className="text-gray-400">{index + 1}.</span>
-                        <span className="text-white">{selectedPhrases[index] || ''}</span>
+                        <span className="text-gray-400">{originalIndex + 1}.</span>
+                        <span className="text-white">{selectedPhrases[index]}</span>
                     </div>
                 ))}
             </div>
 
-            {/* Karıştırılmış kelimeler */}
             <div className="grid grid-cols-4 gap-4 mb-8">
-                {shuffledPhrases.map((phrase, index) => (
+                {allPhrases.map((phrase, index) => (
                     <button
-                        key={`shuffled-${index}`}
-                        onClick={() => !phrase.isSelected && handlePhraseClick(phrase.text, index)}
-                        disabled={phrase.isSelected}
+                        key={index}
+                        onClick={() => {
+                            const emptyIndex = selectedPhrases.findIndex(p => !p);
+                            if (emptyIndex !== -1) {
+                                const newSelected = [...selectedPhrases];
+                                newSelected[emptyIndex] = phrase;
+                                setSelectedPhrases(newSelected);
+                            }
+                        }}
+                        disabled={selectedPhrases.includes(phrase)}
                         className={`
                             p-3 rounded-lg text-center transition-all
-                            ${phrase.isSelected
+                            ${selectedPhrases.includes(phrase)
                                 ? 'bg-[#1F1F1F] text-gray-600 cursor-not-allowed'
                                 : 'bg-[#1F1F1F] text-white hover:bg-[#2A2A2A] cursor-pointer'}
                         `}
                     >
-                        {phrase.text}
+                        {phrase}
                     </button>
                 ))}
             </div>
 
             <button
-                disabled={selectedPhrases.length !== 12 || !isCorrectOrder}
+                onClick={handleNext}
+                disabled={selectedPhrases.some(phrase => !phrase)}
                 className={`
                     w-full py-3 rounded-lg transition-all
-                    ${selectedPhrases.length === 12 && isCorrectOrder
+                    ${selectedPhrases.every(phrase => phrase)
                         ? "bg-gradient-to-r from-[#8000FF] to-[#F15223] text-white hover:opacity-90"
                         : "bg-[#1F1F1F] text-gray-400 cursor-not-allowed"}
                 `}
             >
                 Next
             </button>
+            <SuccessModal
+                isOpen={showSuccessModal}
+                onConfirm={handleConfirm}
+            />
         </div>
     );
 } 
