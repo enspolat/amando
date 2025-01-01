@@ -37,7 +37,7 @@ export default function CreateWallet() {
                         placeholder="Enter a strong password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full bg-[#1F1F1F] text-white rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-1 focus:ring-[#F15223]"
+                        className="w-full bg-[#1F1F1F] text-white rounded-lg px-4 py-3 pr-12 border border-black "
                     />
                     <button
                         type="button"
@@ -73,7 +73,7 @@ export default function CreateWallet() {
                         placeholder="Confirm password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-full bg-[#1F1F1F] text-white rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-1 focus:ring-[#F15223]"
+                        className="w-full bg-[#1F1F1F] text-white rounded-lg px-4 py-3 pr-12  border border-black"
                     />
                     <button
                         type="button"
@@ -93,7 +93,7 @@ export default function CreateWallet() {
                     type="button"
                     disabled={!isValid}
                     className={`w-full h-[56px] rounded-lg transition-all duration-300 ${isValid
-                        ? "bg-gradient-to-r from-[#8000FF] to-[#F15223] hover:opacity-90"
+                        ? "bg-custom-gradient hover:opacity-90"
                         : "bg-[#1F1F1F] text-gray-400 cursor-not-allowed"
                         }`}
                 >

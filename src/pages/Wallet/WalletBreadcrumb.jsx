@@ -23,13 +23,13 @@ export default function WalletBreadcrumb() {
     });
 
     return (
-        <div className="fixed top-20 left-0 right-0 z-10">
+        <div className="absolute top-20 left-0 right-0 z-10">
             <div className="flex items-center h-14 px-4  lg:pl-72">
                 <button
                     onClick={() => navigate(-1)}
-                    className="p-2 hover:bg-[#1F1F1F] rounded-lg transition-colors mr-3"
+                    className="p-2 hover:bg-[#1F1F1F] hover:text-[#F15223] rounded-lg transition-colors mr-3"
                 >
-                    <ChevronLeftIcon className="w-5 h-5 text-gray-400" />
+                    <ChevronLeftIcon className="w-5 h-5 " />
                 </button>
 
                 <div className="flex items-center gap-2 text-gray-400">

@@ -42,8 +42,8 @@ export default function BackupWallet() {
                     onClick={handleNext}
                     disabled={!isChecked}
                     className={`w-full h-[56px] rounded-lg transition-all duration-300 ${isChecked
-                            ? "bg-gradient-to-r from-[#8000FF] to-[#F15223] hover:opacity-90"
-                            : "bg-[#1F1F1F] text-gray-400 cursor-not-allowed"
+                        ? "bg-custom-gradient hover:opacity-90"
+                        : "bg-[#1F1F1F] text-gray-400 cursor-not-allowed"
                         }`}
                 >
                     Next

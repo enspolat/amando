@@ -44,7 +44,7 @@ export default function VerifyRecoveryPhrase() {
         <div className="max-w-2xl mx-auto mt-24">
             <WalletBreadcrumb />
 
-            <div className="text-center mb-8">
+            <div className="text-center mb-24">
                 <h1 className="text-2xl font-bold text-white mb-2">
                     Verify Recovery Phrase
                 </h1>
@@ -53,11 +53,11 @@ export default function VerifyRecoveryPhrase() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-4 gap-4 mb-8 text-white">
+            <div className="grid grid-cols-4 gap-4 mb-20 text-white">
                 {requiredIndexes.map((originalIndex, index) => (
                     <div
                         key={`selected-${index}`}
-                        className="bg-[#1F1F1F] rounded-lg p-3 flex items-center gap-2"
+                        className="bg-black border border-[#333333] rounded-lg p-3 flex items-center gap-2"
                     >
                         <span className="text-gray-400">{originalIndex + 1}.</span>
                         <span className="text-white">{selectedPhrases[index]}</span>
@@ -79,7 +79,7 @@ export default function VerifyRecoveryPhrase() {
                         }}
                         disabled={selectedPhrases.includes(phrase)}
                         className={`
-                            p-3 rounded-lg text-center transition-all
+                           bg-black p-3 rounded-lg text-center transition-all border border-[#333333]
                             ${selectedPhrases.includes(phrase)
                                 ? 'bg-[#1F1F1F] text-gray-600 cursor-not-allowed'
                                 : 'bg-[#1F1F1F] text-white hover:bg-[#2A2A2A] cursor-pointer'}
