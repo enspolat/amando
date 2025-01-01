@@ -6,7 +6,7 @@ import Dex from '../pages/Dex';
 import CreateWallet from '../pages/Wallet/CreateWallet';
 import BackupWallet from '../pages/Wallet/BackupWallet';
 import ConfirmSeedPhrase from '../pages/Wallet/ConfirmSeedPhrase';
-
+import VerifyRecoveryPhrase from '../pages/Wallet/VerifyRecoveryPhrase';
 
 export const router = createBrowserRouter([
     {
@@ -32,7 +32,13 @@ export const router = createBrowserRouter([
                                 children: [
                                     {
                                         path: "confirm",
-                                        element: <ConfirmSeedPhrase />
+                                        element: <ConfirmSeedPhrase />,
+                                        children: [
+                                            {
+                                                path: "verify",
+                                                element: <VerifyRecoveryPhrase />
+                                            }
+                                        ],
                                     }
                                 ],
                             }

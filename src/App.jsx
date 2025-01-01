@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Wallet from './pages/Wallet';
 import CreateWallet from './pages/Wallet/CreateWallet';
 import BackupWallet from './pages/Wallet/BackupWallet';
+import ConfirmSeedPhrase from './pages/Wallet/ConfirmSeedPhrase';
+import VerifyRecoveryPhrase from './pages/Wallet/VerifyRecoveryPhrase';
 
 export default function App() {
   return (
@@ -18,6 +20,8 @@ export default function App() {
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/wallet/create" element={<CreateWallet />} />
               <Route path="/wallet/create/backup" element={<BackupWallet />} />
+              <Route path="/wallet/create/backup/confirm" element={<ConfirmSeedPhrase />} />
+              <Route path="/wallet/create/backup/confirm/verify" element={<VerifyRecoveryPhrase />} />
             </Routes>
           </main>
         </div>

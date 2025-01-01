@@ -10,7 +10,8 @@ export default function WalletBreadcrumb() {
         wallet: 'Wallet',
         create: 'Create a New Wallet',
         backup: 'Back Up Your Wallet',
-        confirm: 'Confirm Your Seed Phrase'
+        confirm: 'Confirm Your Seed Phrase',
+        verify: 'Verify Recovery Phrase'
     };
 
     const breadcrumbs = pathSegments.map((segment, index) => {
