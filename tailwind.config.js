@@ -14,8 +14,13 @@ export default {
 
 
       },
-
+      filter: {
+        'orange': 'invert(42%) sepia(94%) saturate(1352%) hue-rotate(346deg) brightness(97%) contrast(101%)',
+        'gray': 'invert(42%) sepia(9%) saturate(6%) hue-rotate(314deg) brightness(94%) contrast(86%)'
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
