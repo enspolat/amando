@@ -1,6 +1,7 @@
 
 import React, { useState } from "react"
 import WalletModal from './WalletModal'
+import LanguageSelector from './LanguageSelector';
 
 
 export default function Header() {
@@ -79,15 +80,8 @@ export default function Header() {
                 <div class="h-[40px] bg-[#333333] w-px "></div>
 
 
-                <button>
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.66663 9.33333H29.3333V22.6667H2.66663V9.33333Z" fill="#012169" />
-                        <path d="M2.66663 9.33333V10.8229L26.3515 22.6667H29.3333V21.1771L5.6484 9.33333H2.66663ZM29.3333 9.33333V10.8229L5.6484 22.6667H2.66663V21.1771L26.3515 9.33333H29.3333Z" fill="white" />
-                        <path d="M13.7786 9.33333V22.6667H18.2213V9.33333H13.7786ZM2.66663 13.7786V18.2213H29.3333V13.7786H2.66663Z" fill="white" />
-                        <path d="M2.66663 14.6667V17.3333H29.3333V14.6667H2.66663ZM14.6666 9.33333V22.6667H17.3333V9.33333H14.6666ZM2.66663 22.6667L11.5546 18.2213H13.5442L4.65361 22.6667H2.66663ZM2.66663 9.33333L11.5546 13.7786H9.56767L2.66663 10.3281V9.33333ZM18.4583 13.7786L27.3463 9.33333H29.3333L20.4453 13.7786H18.4583ZM29.3333 22.6667L20.4453 18.2213H22.4323L29.3333 21.6719V22.6667Z" fill="#C8102E" />
-                    </svg>
+                <LanguageSelector />
 
-                </button>
             </div>
 
 
