@@ -6,7 +6,7 @@ export default function MainLayout() {
     return (
         <div className="min-h-screen bg-black">
             <Sidebar />
-            <div className="pl-64">
+            <div className="lg:pl-64 pl-0">
                 <Header />
                 <main className="p-6 w-full ">
                     <Outlet />
