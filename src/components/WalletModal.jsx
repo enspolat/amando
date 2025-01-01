@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+
 import PropTypes from 'prop-types'
 import { X } from 'lucide-react'
 import logo from '../assets/logo.svg';
@@ -8,6 +10,8 @@ import walletConnect from '../assets/wallet-connect.svg';
 import trustWallet from '../assets/trust-wallet.svg';
 
 export default function WalletModal({ isOpen, onClose }) {
+    const navigate = useNavigate();
+
     if (!isOpen) return null
 
     const amandoWallets = [{ id: 'amando', name: 'Amando Wallet', icon: logo },]
@@ -36,10 +40,14 @@ export default function WalletModal({ isOpen, onClose }) {
                     </button>
 
                 </div>
-                <div className=" mb-4  space-y-2 height-[72px] overflow-y-auto">
+                <div className="mb-4 space-y-2 height-[72px] overflow-y-auto">
                     {amandoWallets.map((wallet) => (
                         <button
                             key={wallet.id}
+                            onClick={() => {
+                                navigate('/wallet');
+                                onClose();
+                            }}
                             className="w-full flex items-center gap-3 p-3 rounded-lg text-left text-white hover:text-[#F15223] hover:bg-[#141414] transition-colors"
                         >
                             <div className="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full">
@@ -49,9 +57,9 @@ export default function WalletModal({ isOpen, onClose }) {
                         </button>
                     ))}
                 </div>
+
+
                 <div className='border-b border-gray-800'></div>
-
-
 
                 <div className="mt-4 space-y-2 height-[72px] overflow-y-auto">
                     {wallets.map((wallet) => (
