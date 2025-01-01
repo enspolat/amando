@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import WalletBreadcrumb from './WalletBreadcrumb';
 import { ClipboardDocumentCheckIcon } from '@heroicons/react/24/outline';
 import warning from '../../assets/warning.svg';
@@ -13,27 +14,33 @@ const wordList = [
 ];
 
 export default function ConfirmSeedPhrase() {
+    const navigate = useNavigate();
     const [seedPhrases, setSeedPhrases] = useState([]);
     const [copied, setCopied] = useState(false);
 
-    const generateRandomPhrases = () => {
-        const phrases = [];
-        const usedIndexes = new Set();
 
-        while (phrases.length < 12) {
-            const randomIndex = Math.floor(Math.random() * wordList.length);
-            if (!usedIndexes.has(randomIndex)) {
-                usedIndexes.add(randomIndex);
-                phrases.push(wordList[randomIndex]);
+
+    const generateRandomPhrases = () => {
+        let phrases = [];
+
+        for (let i = 0; i < 12; i++) {
+            let randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+
+            while (phrases.includes(randomWord)) {
+                randomWord = wordList[Math.floor(Math.random() * wordList.length)];
             }
+
+            phrases.push(randomWord);
         }
 
         return phrases;
     };
-
     useEffect(() => {
-        setSeedPhrases(generateRandomPhrases());
+        const phrases = generateRandomPhrases();
+        setSeedPhrases(phrases);
+        localStorage.setItem('seedPhrases', JSON.stringify(phrases));
     }, []);
+
 
     const handleCopy = async () => {
         try {
@@ -65,9 +72,9 @@ export default function ConfirmSeedPhrase() {
                 {seedPhrases.map((phrase, index) => (
                     <div
                         key={index}
-                        className="bg-[#1F1F1F] rounded-lg p-3 flex items-center gap-2"
+                        className="bg-black justify-center text-sm border border-[#333333] rounded-xl px-4 py-2 flex items-center gap-2"
                     >
-                        <span className="text-gray-400">{index + 1}.</span>
+
                         <span className="text-white">{phrase}</span>
                     </div>
                 ))}
@@ -98,6 +105,8 @@ export default function ConfirmSeedPhrase() {
             </div>
 
             <button
+                onClick={() => navigate('/wallet/create/backup/confirm/verify')}
+
                 className="w-full py-3 rounded-lg bg-gradient-to-r from-[#8000FF] to-[#F15223] text-white hover:opacity-90 transition-opacity"
             >
                 Next
