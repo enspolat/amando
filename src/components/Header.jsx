@@ -7,7 +7,7 @@ export default function Header() {
     const [isWalletModalOpen, setIsWalletModalOpen] = useState(false)
 
     return (
-        <header className=" flex items-center justify-between px-6 py-4 bg-black border-b border-gray-800">
+        <header className=" flex items-center justify-between px-6 py-4">
             <div className="flex items-center gap-2">
 
                 <div className="hidden md:flex items-center gap-4 ml-8">
