@@ -1,23 +1,23 @@
-import { BrowserRouter } from 'react-router-dom';
-import Header from './components/Header';
-import Sidebar from './components/MainSidebar';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
 import Home from './pages/Home';
 import Wallet from './pages/Wallet';
-import Dex from './pages/Dex';
+import CreateWallet from './pages/Wallet/CreateWallet';
+import BackupWallet from './pages/Wallet/BackupWallet';
 
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-900">
+      <div className="min-h-screen bg-[#111318]">
         <Sidebar />
-        <div className="pl-64">
+        <div className="lg:pl-64">
           <Header />
           <main className="p-6 w-full">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/wallet" element={<Wallet />} />
-              <Route path="/dex" element={<Dex />} />
+              <Route path="/wallet/create" element={<CreateWallet />} />
+              <Route path="/wallet/create/backup" element={<BackupWallet />} />
             </Routes>
           </main>
         </div>
